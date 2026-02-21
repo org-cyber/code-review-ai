@@ -213,8 +213,9 @@ export default function CodeEditor() {
                   value={code}
                   onChange={(e) => setCode(e.target.value)}
                   rows={12}
-                  placeholder={`// Paste your ${language} code here…`}
+                  placeholder={`// Paste your code here…`}
                 />
+
               </div>
 
               {/* Submit row */}
