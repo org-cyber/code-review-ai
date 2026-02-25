@@ -72,6 +72,13 @@ const IconEmpty = () => (
   </svg>
 );
 
+const IconCopy = () => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/>
+    <rect x="8" y="2" width="8" height="4" rx="1" ry="1"/>
+  </svg>
+);
+
 const LANGUAGES = [
   { value: "javascript", label: "JavaScript", icon: "JS" },
   { value: "Java", label: "Java", icon: "JAVA" },
@@ -91,6 +98,7 @@ export default function CodeEditor() {
   const [warnings, setWarnings] = useState<string[]>([]);
   const [suggestions, setSuggestions] = useState<string[]>([]);
   const [fullcorrectedcode, setFullCorrectedCode] = useState<string[]>([]);
+  const [copyFeedback, setCopyFeedback] = useState("");
 
   const hasResults = summary || errors.length > 0 || warnings.length > 0 || suggestions.length > 0 || fullcorrectedcode.length > 0;
 
@@ -137,6 +145,17 @@ export default function CodeEditor() {
     } finally {
       setLoading(false);
     }
+  }
+
+  function handleCopyCode() {
+    const codeText = fullcorrectedcode.join('\n');
+    navigator.clipboard.writeText(codeText).then(() => {
+      setCopyFeedback("Copied!");
+      setTimeout(() => setCopyFeedback(""), 2000);
+    }).catch(() => {
+      setCopyFeedback("Failed to copy");
+      setTimeout(() => setCopyFeedback(""), 2000);
+    });
   }
 
   return (
@@ -340,11 +359,28 @@ export default function CodeEditor() {
                         <span className="count-badge">{fullcorrectedcode.length} changes</span>
                       </div>
                       <div className="result-section-body">
-                        <ul className="result-list">
+                        {/*<ul className="result-list">
                           {fullcorrectedcode.map((fix, i) => (
                             <li key={i}>{fix}</li>
                           ))}
-                        </ul>
+                        </ul>*/}
+                      </div>
+
+                      {/* Full Corrected Code Display */}
+                      <div className="corrected-code-section">
+                        <div className="corrected-code-header">
+                          {/*<h3>Corrected Code</h3>*/}
+                          <button 
+                            type="button"
+                            className="copy-btn-inline"
+                            onClick={handleCopyCode}
+                            title="Copy corrected code to clipboard"
+                          >
+                            <IconCopy />
+                            {copyFeedback || "Copy Code"}
+                          </button>
+                        </div>
+                        <pre className="code-display"><code>{fullcorrectedcode.join('\n')}</code></pre>
                       </div>
                     </div>
                   )}
