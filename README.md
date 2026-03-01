@@ -1,6 +1,6 @@
-# CodeReviewAI 🛡️
+# aya 🛡️
 
-**CodeReviewAI** is a premium, AI-powered code analysis tool that provides instant feedback on your scripts. Whether you're writing JavaScript, TypeScript, or Python, CodeReviewAI identifies bugs, suggests performance optimizations, and provides a fully corrected version of your code in seconds.
+**aya** is a premium, AI-powered code analysis tool that provides instant feedback on your scripts. Whether you're writing JavaScript, TypeScript, or Python, aya identifies bugs, suggests performance optimizations, and provides a fully corrected version of your code in seconds.
 
 Built with **Next.js 15+**, **React 19**, and powered by the cutting-edge **Groq Cloud API** (Llama-3 models).
 
@@ -101,4 +101,4 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ---
 
-Built with ❤️ by the CodeReviewAI Team.
+Built with ❤️ by the aya Team.
